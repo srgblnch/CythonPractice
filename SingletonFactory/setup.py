@@ -45,7 +45,10 @@ usage.
 This part like to show how one can have a Factory object that is a singleton.
 """
 
-extensions = [{'name': projectName,
+extensions = [{'name': "%s.subm" % (projectName),
+               'dir': 'Factory/subm',
+               'src': ['__init__.pyx']},
+              {'name': projectName,
                'dir': 'Factory',
                'src': ['__init__.pyx']}]
 
@@ -61,7 +64,9 @@ for extension in extensions:
         source = [fileName.replace('.pyx', '.c') for fileName in files]
     ext_modules += [Extension(extension['name'], files)]
 
-cmdclass = {'build_ext': build_ext}
+cmdclass = {}
+if use_cython:
+    cmdclass.update({'build_ext': build_ext})
 
 classifiers = []
 classifiers.append('Development Status :: 1 - Planning')
