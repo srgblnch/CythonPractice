@@ -23,7 +23,7 @@ __license__ = "GPLv3+"
 __status__ = "development"
 # we use semantic versioning (http://semver.org/) and we update it using the
 # bumpversion script (https://github.com/peritus/bumpversion)
-__version__ = '0.0.2-alpha'
+__version__ = '0.0.2'
 
 try:
     from Cython.Build import cythonize
