@@ -27,7 +27,7 @@ __status__ = "development"
 # we use semantic versioning (http://semver.org/) and we update it using the
 # bumpversion script (https://github.com/peritus/bumpversion)
 
-__version = '0.0.1-alpha'
+__version = '0.0.1'
 
 
 def version():
