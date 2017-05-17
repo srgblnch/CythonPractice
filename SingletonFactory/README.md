@@ -16,7 +16,10 @@ To build the extension:
 
 ```bash
 $ python3 setup.py build
+$ python3 setup.py install
 ```
+
+To install in a different directory, but in the pythonpath append at the end of the install command: "--prefix _path_".
 
 ```python
 >>> import Factory
