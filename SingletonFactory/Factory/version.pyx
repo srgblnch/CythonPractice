@@ -27,18 +27,18 @@ __status__ = "development"
 # we use semantic versioning (http://semver.org/) and we update it using the
 # bumpversion script (https://github.com/peritus/bumpversion)
 
-__version = '0.0.2-alpha'
+__version__ = '0.0.2-alpha'
 
 
 def version():
-    return __version
+    return __version__
 
 
 def versiontuple():
     if '-' in __version:
-        _v, _rel = __version.split('-')
+        _v, _rel = __version__.split('-')
     else:
-        _v, _rel = __version, ''
+        _v, _rel = __version__, ''
     _v = [int(n) for n in _v.split('.')]
     if len(_rel) > 0:
         _v += [_rel]
