@@ -33,6 +33,6 @@ To install in a different directory, but in the pythonpath append at the end of 
 
 ## Known issues
 
-- Following the [PackageHierarchy](https://github.com/cython/cython/wiki/PackageHierarchy) the directory Factory should contain a "\__init\__.py" file, but then the module imported doen't have the Factory object.
+- Following the [PackageHierarchy](https://github.com/cython/cython/wiki/PackageHierarchy) the directory Factory should contain a "\_\_init\_\_.py" file, but then the module imported doen't have the Factory object.
 
 - Separate the _singleton_ file in a submodule, lets say _utils_, it is unknown how later the import must be made.
