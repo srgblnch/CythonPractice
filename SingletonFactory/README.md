@@ -12,6 +12,12 @@ SingletonFactory
      |-- version.pyx
 ```
 
+To build the extension:
+
+```bash
+$ python3 setup.py build
+```
+
 ```python
 >>> import Factory
 >>> Factory.version()
