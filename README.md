@@ -3,14 +3,8 @@
 _Toy-project_ to write usage examples with [Cython](http://cython.org/) to have
 recipes about how can things can be made.
 
-## SingletonFactory
+## [SingletonFactory](SingletonFactory)
 
-```
-SingletonFactory
- |-- setup.py
- |-- Factory
-     |-- __init__.py
-     |-- factory.pyx
-     |-- singleton.pyx
-     |-- version.pyx
-```
+Example about how can be prepared a singleton object that would be a Factory
+constructor.
+
