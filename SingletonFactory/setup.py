@@ -47,7 +47,7 @@ This part like to show how one can have a Factory object that is a singleton.
 
 extensions = [{'name': projectName,
                'dir': 'Factory',
-               'src': ['version.pyx', 'factory.pyx']}]
+               'src': ['__init__.pyx']}]
 
 packages = [extensions[i]['name'] for i in range(len(extensions))]
 ext_modules = []

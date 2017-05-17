@@ -22,4 +22,5 @@ __copyright__ = "Copyright 2017 Sergi Blanch-Torne"
 __license__ = "GPLv3+"
 __status__ = "development"
 
-# Empty File
+include "factory.pyx"
+include "version.pyx"
