@@ -22,6 +22,8 @@ __copyright__ = "Copyright 2017 Sergi Blanch-Torne"
 __license__ = "GPLv3+"
 __status__ = "development"
 
+include "singleton.pyx"
+
 
 @__singleton__
 class Factory(object):

@@ -5,11 +5,17 @@ This code will provide an singleton object.
 ```
 SingletonFactory
  |-- setup.py
- |-- Factory
-     |-- __init__.pyx
+ |-- barfoo
+     |-- [__init__.py]
+     |-- [__init__.pyx]
      |-- factory.pyx
      |-- singleton.pyx
      |-- version.pyx
+     |-- subm
+         |-- [__init__.py]
+         |-- [__init__.pyx]
+         |-- bar.pyx
+         |-- foo.pyx
 ```
 
 To build the extension:
@@ -22,13 +28,13 @@ $ python3 setup.py install
 To install in a different directory, but in the pythonpath append at the end of the install command: "--prefix _path_".
 
 ```python
->>> import Factory
->>> Factory.version()
+>>> import barfoo
+>>> barfoo.version()
  '0.0.1-alpha'
->>> Factory.Factory()
- <Factory.__init__.Factory at 0x7fbdae14eda0>
->>> Factory.Factory()
- <Factory.__init__.Factory at 0x7fbdae14eda0>
+>>> barfoo.Factory()
+ <barfoo.__init__.Factory at 0x7fbdae14eda0>
+>>> barfoo.Factory()
+ <barfoo.__init__.Factory at 0x7fbdae14eda0>
 ```
 
 ## Known issues

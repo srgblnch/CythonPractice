@@ -36,7 +36,7 @@ from os import system
 from setuptools import setup, Extension, Command
 
 
-projectName = "Factory"
+projectName = "barfoo"
 shortDescription = "Python module to provide a Singleton Factory"
 longDescription = """
 This code is part of a Toy-project thought as a logbook of recipes for Cython
@@ -46,11 +46,11 @@ This part like to show how one can have a Factory object that is a singleton.
 """
 
 extensions = [{'name': "%s.subm" % (projectName),
-               'dir': 'Factory/subm',
-               'src': ['__init__.pyx']},
+               'dir': '%s/subm' % (projectName),
+               'src': ['bar.pyx', 'foo.pyx']},
               {'name': projectName,
-               'dir': 'Factory',
-               'src': ['__init__.pyx']}]
+               'dir': '%s' % (projectName),
+               'src': ['factory.pyx', 'version.pyx']}]
 
 packages = [extensions[i]['name'] for i in range(len(extensions))]
 ext_modules = []
