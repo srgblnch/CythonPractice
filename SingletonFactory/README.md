@@ -27,6 +27,8 @@ $ python3 setup.py install
 
 To install in a different directory, but in the pythonpath append at the end of the install command: "--prefix _path_".
 
+## version 0.0.1:
+
 ```python
 >>> import barfoo
 >>> barfoo.version()
@@ -37,8 +39,25 @@ To install in a different directory, but in the pythonpath append at the end of 
  <barfoo.__init__.Factory at 0x7fbdae14eda0>
 ```
 
-## Known issues
+But due to then, there are issues to solve when the factory likes to load a submodule to build object from them.
 
-- Following the [PackageHierarchy](https://github.com/cython/cython/wiki/PackageHierarchy) the directory Factory should contain a "\_\_init\_\_.py" file, but then the module imported doen't have the Factory object.
+## The issues:
 
-- Separate the _singleton_ file in a submodule, lets say _utils_, it is unknown how later the import must be made.
+### Multiple cythonize files
+
+Using the tag [multiplecythonize](https://github.com/srgblnch/CythonPractice/tree/multiplecythonize/SingletonFactory) one get the exception:
+
+```python
+>>> import barfoo
+(...)
+ImportError: dynamic module does not define init function (PyInit_barfoo)
+```
+
+### Submodule import
+
+With a \_\_init\_\_.pyx file (tag [nosubmodule](https://github.com/srgblnch/CythonPractice/tree/nosubmodule/SingletonFactory)) that does an include of those multiple files, then it can be imported, but not the submodule.
+
+### \_\_init\_\_.py files
+
+When those directories with sources have "\_\_init\_\_.py files, then the import of the module points to the installed ".py" file and not the ".so".
+
