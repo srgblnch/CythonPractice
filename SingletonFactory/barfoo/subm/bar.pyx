@@ -24,7 +24,7 @@ __status__ = "development"
 
 class Bar(object):
     def __init__(self, *args, **kwargs):
-        super(Bar, self).__init__(*args, *kwargs)
+        super(Bar, self).__init__(*args, **kwargs)
 
     @property
     def bar(self):

@@ -24,7 +24,7 @@ __status__ = "development"
 
 class Foo(object):
     def __init__(self, *args, **kwargs):
-        super(Foo, self).__init__(*args, *kwargs)
+        super(Foo, self).__init__(*args, **kwargs)
 
     @property
     def foo(self):
