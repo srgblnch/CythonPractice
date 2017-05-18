@@ -47,7 +47,7 @@ This part like to show how one can have a Factory object that is a singleton.
 
 extensions = [{'name': "%s.subm" % (projectName),
                'dir': '%s/subm' % (projectName),
-               'src': ['bar.pyx', 'foo.pyx']},
+               'src': ['__init__.pyx']},
               {'name': projectName,
                'dir': '%s' % (projectName),
                'src': ['__init__.pyx']}]
