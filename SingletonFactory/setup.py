@@ -50,7 +50,7 @@ extensions = [{'name': "%s.subm" % (projectName),
                'src': ['bar.pyx', 'foo.pyx']},
               {'name': projectName,
                'dir': '%s' % (projectName),
-               'src': ['factory.pyx', 'version.pyx']}]
+               'src': ['__init__.pyx']}]
 
 packages = [extensions[i]['name'] for i in range(len(extensions))]
 ext_modules = []

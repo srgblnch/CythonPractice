@@ -23,7 +23,6 @@ __license__ = "GPLv3+"
 __status__ = "development"
 
 include "version.pyx"
-include "singleton.pyx"
 
 include "factory.pyx"
 
