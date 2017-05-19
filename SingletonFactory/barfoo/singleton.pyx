@@ -23,7 +23,7 @@ __license__ = "GPLv3+"
 __status__ = "development"
 
 
-def __singleton__(cls):
+cdef __singleton__(cls):
     instances = {}
     def getinstance():
         if cls not in instances:

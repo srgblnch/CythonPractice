@@ -22,5 +22,5 @@ __copyright__ = "Copyright 2017 Sergi Blanch-Torne"
 __license__ = "GPLv3+"
 __status__ = "development"
 
-include "bar.pyx"
-include "foo.pyx"
+from .bar import Bar
+from .foo import Foo

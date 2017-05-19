@@ -25,94 +25,96 @@ __status__ = "development"
 # bumpversion script (https://github.com/peritus/bumpversion)
 __version__ = '0.0.2-alpha'
 
+from setuptools import setup, find_packages  #, Extension
 try:
     from Cython.Build import cythonize
-    from Cython.Distutils import build_ext
 except ImportError:
-    use_cython = False
-else:
-    use_cython = True
-from os import system
-from setuptools import setup, Extension, Command
+    raise ImportError("Having Cython installed is required")
+import os
+
 
 
 projectName = "barfoo"
-shortDescription = "Python module to provide a Singleton Factory"
-longDescription = """
-This code is part of a Toy-project thought as a logbook of recipes for Cython
-usage.
+# shortDescription = "Python module to provide a Singleton Factory"
+# longDescription = """
+# This code is part of a Toy-project thought as a logbook of recipes for Cython
+# usage.
+# 
+# This part like to show how one can have a Factory object that is a singleton.
+# """
 
-This part like to show how one can have a Factory object that is a singleton.
-"""
-
-extensions = [{'name': "%s.subm" % (projectName),
-               'dir': '%s/subm' % (projectName),
-               'src': ['__init__.pyx']},
-              {'name': projectName,
-               'dir': '%s' % (projectName),
-               'src': ['__init__.pyx']}]
-
-packages = [extensions[i]['name'] for i in range(len(extensions))]
-ext_modules = []
-for extension in extensions:
-    files = []
-    for fileName in extension['src']:
-        files.append("%s/%s" % (extension['dir'], fileName))
-    if use_cython:
-        source = cythonize(files)
-    else:
-        source = [fileName.replace('.pyx', '.c') for fileName in files]
-    ext_modules += [Extension(extension['name'], files)]
-
-cmdclass = {}
-if use_cython:
-    cmdclass.update({'build_ext': build_ext})
-
-classifiers = []
-classifiers.append('Development Status :: 1 - Planning')
-classifiers.append('Intended Audience :: Developers')
-classifiers.append('License :: OSI Approved :: '
-                   'GNU General Public License v3 or later (GPLv3+)')
-classifiers.append('Operating System :: POSIX')
-classifiers.append('Programming Language :: Cython')
-classifiers.append('Topic :: Software Development :: Libraries :: '
-                   'Python Modules')
+# classifiers = []
+# classifiers.append('Development Status :: 1 - Planning')
+# classifiers.append('Intended Audience :: Developers')
+# classifiers.append('License :: OSI Approved :: '
+#                    'GNU General Public License v3 or later (GPLv3+)')
+# classifiers.append('Operating System :: POSIX')
+# classifiers.append('Programming Language :: Cython')
+# classifiers.append('Topic :: Software Development :: Libraries :: '
+#                    'Python Modules')
 
 
-class CleanCommand(Command):
-    """Modify the clean command to remove the cythonized files."""
-    user_options = []
-
-    def initialize_options(self):
-        pass
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        sources = ['./build', './*.egg-info']
-        for extension in extensions:
-            sources += ["./%s/%s" % (extension['dir'],
-                                     file.replace('.pyx', '.c'))
-                        for file in extension['src']]
-        for file in sources:
-            system('rm -vrf %s' % file)
-
-cmdclass.update({'clean': CleanCommand})
+def find_pyx(path='.'):
+    pyx_files = []
+    for root, dirs, filenames in os.walk(path):
+        for fname in filenames:
+            if fname.endswith('.pyx'):
+                pyx_files.append(os.path.join(root, fname))
+    print(pyx_files)
+    return pyx_files
 
 
-configuration = {'name': projectName,
-                 'version': __version__,
-                 'license': __license__,
-                 'description': shortDescription,
-                 'long_description': longDescription,
-                 'author': __author__,
-                 'author_email': __email__,
-                 'setup_requires': ['cython'],
-                 'ext_modules': ext_modules,
-                 'cmdclass': cmdclass,
-                 'packages': packages,
-                 'classifiers': classifiers}
+def build_extension():
+    extensions = []
+    files = find_pyx()
+    for file in files:
+        print(">> file: %s "% (file))
+        source = cythonize(file)
+        print(">> cythonized: %s" % (source[0].name))
+        extensions.append(Extension(file,
+                                    sources=cythonize(file)))
+    # return cythonize(find_pyx(), language_level=3)
+    return extensions
 
 
-setup(**configuration)
+# class CleanCommand(Command):
+#     """Modify the clean command to remove the cythonized files."""
+#     user_options = []
+
+#     def initialize_options(self):
+#         pass
+
+#     def finalize_options(self):
+#         pass
+
+#     def run(self):
+#         sources = ['./build', './*.egg-info']
+#         files = []
+#         for fileName in find_pyx():
+#             files.append(fileName.replace('.pyx', '.c'))
+#         print(">> c files: %s" % files)
+#         for soFile in find_so():
+#             print(">> so file: %s" % fileName)
+#             files.append(soFile)
+#         for file in files:
+#             os.system('rm -vrf %s' % file)
+
+# cmdclass.update({'clean': CleanCommand})
+
+sources = cythonize(find_pyx(), language_level=3)
+print("%s = cythonize(%s)" % (sources, find_pyx()))
+
+
+setup(name=projectName,
+      version=__version__,
+      #license=__license__,
+      #description=shortDescription,
+      #long_description=longDescription,
+      #author=__author__,
+      #author_email=__email__,
+      #setup_requires=['cython'],
+      ext_modules=cythonize(find_pyx(), language_level=3),
+      #ext_modules=build_extension(),
+      packages=find_packages(),
+      #classifiers=classifiers
+      )

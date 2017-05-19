@@ -22,7 +22,9 @@ __copyright__ = "Copyright 2017 Sergi Blanch-Torne"
 __license__ = "GPLv3+"
 __status__ = "development"
 
-include "version.pyx"
+# include "version.pyx"
 
-include "factory.pyx"
+# include "factory.pyx"
 
+from .factory import Factory
+from .version import version, versiontuple
