@@ -22,7 +22,8 @@ __copyright__ = "Copyright 2017 Sergi Blanch-Torne"
 __license__ = "GPLv3+"
 __status__ = "development"
 
-class Bar(object):
+
+cdef class Bar(object):
     def __init__(self, *args, **kwargs):
         super(Bar, self).__init__(*args, **kwargs)
 

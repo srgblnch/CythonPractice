@@ -23,10 +23,5 @@ __license__ = "GPLv3+"
 __status__ = "development"
 
 
-cdef class Foo(object):
-    def __init__(self, *args, **kwargs):
-        super(Foo, self).__init__(*args, **kwargs)
-
-    @property
-    def foo(self):
-        return "foo"
+cdef class Bar:
+    pass

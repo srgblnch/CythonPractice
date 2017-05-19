@@ -24,8 +24,14 @@ __status__ = "development"
 
 
 from barfoo.singleton cimport __singleton__
+from barfoo.subm import Bar
+from barfoo.subm import Foo
 
 
 @__singleton__
 class Factory(object):
-    pass
+    def getBar(self):
+        return Bar()
+
+    def getFoo(self):
+        return Foo()

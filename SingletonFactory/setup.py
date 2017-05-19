@@ -66,6 +66,16 @@ def find_file_by_extension(path='.', ext='.pyx'):
                 files.append(os.path.join(root, fname))
     return files
 
+def find_directories(path='.', names=None):
+    directories = []
+    if names is not None and isinstance(names, list):
+        for root, dirs, filenames in os.walk(path):
+            if len(dirs) > 0 and dirs[0] in names:
+                dname = "%s/%s" % (root, dirs[0])
+                if not dname in directories:
+                    directories.append(dname)
+    return directories
+
 
 def find_pyx(path='.'):
     return find_file_by_extension(path, ext='.pyx')
@@ -74,7 +84,7 @@ def find_pyx(path='.'):
 def find_so(path='.'):
     return find_file_by_extension(path, ext='.so')
 
-
+# FIXME: it is call in all commands, even when 'clean'
 def build_extension():
     """
         This method can be simply:
@@ -85,7 +95,7 @@ def build_extension():
     extensions = []
     files = find_pyx()
     for file in files:
-        source = cythonize(file, language_level=3)
+        source = cythonize(file)
         extensions += source
     return extensions
 
@@ -107,8 +117,12 @@ class CleanCommand(Command):
             files.append(fileName.replace('.pyx', '.c'))
         for soFile in find_so():
             files.append(soFile)
+        for pyc in find_file_by_extension(ext='.pyc'):
+            files.append(pyc)
         for file in files:
             os.system('rm -vrf %s' % file)
+        for directory in find_directories(names=['__pycache__']):
+            os.system('rm -vrf %s' % directory)
 
 cmdclass = {}
 cmdclass.update({'clean': CleanCommand})
